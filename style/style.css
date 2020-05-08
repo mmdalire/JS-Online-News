@@ -1,0 +1,282 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;500&display=swap');
+
+:root {
+    --main-color: #1B1B1B;
+    --secondary-color: wheat;
+    --tertiary-color: white;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    text-decoration: none;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+body {
+    background-color: var(--tertiary-color);
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+}
+
+/*Header*/
+/*Navigation bar*/
+header {
+    background-color: var(--main-color);
+    height: 20%;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin: auto;
+    height: 70px;
+    color: wheat;
+}
+
+#newspaper-logo {
+    color: wheat;
+}
+
+.nav-logo {
+    height: 100%;
+    line-height: 2.3;
+    font-size: 30px;
+    font-weight: bold;
+    padding: 0 20px;
+    color: wheat;
+}
+
+.nav-links li{
+    color: wheat;
+    display: inline-block;
+    padding: 20px;
+    line-height: 2;
+    transition: 0.5s all;
+}
+
+.nav-links li:hover {
+    background-color: wheat;
+    color: var(--main-color);
+    cursor: pointer;
+}
+
+/*Image slider*/
+.image-slide {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background: url('../images/sample_image.jpg');
+    background-position: center;
+    background-size: cover;
+}
+
+.image-capture {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background-color: var(--main-color);
+    opacity: 0.9;
+}
+
+.image-capture {
+    padding: 15px;
+}
+
+.image-headline {
+    font-size: 23px;
+    color: wheat;
+}
+
+.image-author {
+    color: gray;
+}
+
+#left-btn {
+    position: absolute;
+    top: 35%;
+    left: 1%;
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+#right-btn {
+    position: absolute;
+    top: 35%;
+    right: 1%;
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+#left-btn:hover,
+#right-btn:hover {
+    opacity: 1;
+}
+
+/*Top headlines section*/
+.top-headlines {
+    margin: 20px 0;
+}
+
+.title {
+    padding: 10px 0;
+    border-bottom: 2px solid var(--main-color);
+}
+
+.headline-grid {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.news-card {
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    background-color: var(--secondary-color);
+}
+
+#thumbnail {
+    object-fit: cover;
+    width: 100%;
+}
+
+small {
+    display: block;
+    color: gray;
+    margin: 2px;
+}
+
+.news-info {
+    padding: 5px 10px;
+}
+
+.click-more {
+    margin-top: 10px;
+    padding: 10px 0;
+    border-top: 2px solid var(--main-color);
+    text-align: center;
+}
+
+.space {
+    height: 100px;
+}
+
+/*News description*/
+.news-description {
+    display: flex;
+    overflow: hidden;
+    height: 400px;
+    background-color: var(--main-color);
+    color: var(--tertiary-color);
+    animation-name: swipe-down;
+    animation-duration: 1s;
+    margin: 0 -70px;
+}
+
+#full-image {
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.news-complete-info{
+    margin: 0 30px;
+    padding: 30px 0;
+    color: white;
+}
+
+.news-complete-info small {
+    font-size: 16px;
+}
+
+.news-full-description {
+    padding: 10px 0;
+    margin: 10px 0;
+    border-top: 2px solid var(--tertiary-color);
+    text-align: justify;
+    height: 50%;
+}
+
+.news-source {
+    color: gray;
+    font-size: 18px;
+    text-align: right;
+    font-style: italic;
+}
+
+.buttons-container {
+    text-align: center;
+}
+
+#redirect, 
+#close-description {
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+/*Footer*/
+/*Footer*/
+footer {
+    overflow-x: hidden;
+    padding: 10px;
+    width: 100%;
+    color: var(--tertiary-color);
+    background-color: var(--main-color);
+  }
+  
+  .footer-main {
+    display: flex;
+    justify-content: space-between; 
+  }
+  
+  .footer-title {
+    margin: 10px 0;
+    display: flex;
+  }
+  
+  .footer-powered-api {
+    margin-top: 10px;
+  }
+  
+  .api-images {
+    display: flex;
+  }
+  
+  .api-images img {
+    width: 100px;
+  }
+  
+  .footer-image-credits {
+    border-top: 2px solid white;
+    padding-top: 10px;
+    color: white;
+  }
+  
+  #logo {
+    width: 120px;
+    margin-right: 20px;
+  }
+
+@keyframes swipe-down {
+    from{
+        height: 0;
+    }
+    to {
+        height: 500px;
+    }
+}
