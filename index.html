@@ -16,6 +16,9 @@
                 <i class="far fa-newspaper" id="newspaper-logo"></i>
                 Online News
             </div>
+            <div class="nav-mobile-logo">
+                <i class="fas fa-bars" id="bars"></i>
+            </div>
             <div class="nav-links">
                 <li>Business</li>
                 <li>Entertainment</li>
@@ -25,85 +28,229 @@
                 <li>Sports</li>
                 <li>Technology</li>
             </div>
+            <div class="nav-search">
+                <input type="text" id="search-keyword" placeholder="Search keyword">
+                <i class="fas fa-search" id="search-keyword-btn"></i>
+            </div>
         </nav>
     </header>
-    <section class="image-slider">
-        <div class="image-slide">
-            <div class="image-capture">
-                <div class="image-headline">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam sapiente nulla porro alias numquam
-                    neque iste doloremque, sed qui corrupti.
+
+    <section class="mobile-nav-bar">
+        <div class="nav-close">
+            <i class="fas fa-times" id="close"></i>
+        </div>
+        <div class="nav-logo">
+            <i class="far fa-newspaper" id="newspaper-logo"></i>
+            Online News
+        </div>
+        <div class="nav-search">
+            <input type="text" id="mobile-search-keyword" placeholder="Search keyword">
+            <i class="fas fa-search" id="search-keyword-btn"></i>
+        </div>
+        <div class="nav-links">
+            <li>Business</li>
+            <li>Entertainment</li>
+            <li>General</li>
+            <li>Health</li>
+            <li>Science</li>
+            <li>Sports</li>
+            <li>Technology</li>
+        </div>
+    </section>
+
+    <section class="display-category">
+        <section class="image-slider">
+            <div class="image-slide">
+                <div class="image-capture">
+                    <div class="image-headline">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam sapiente nulla porro alias
+                        numquam
+                        neque iste doloremque, sed qui corrupti.
+                    </div>
+                    <div class="image-author">
+                        Some author
+                    </div>
                 </div>
-                <div class="image-author">
-                    Some author
+            </div>
+            <i class="fas fa-chevron-circle-left fa-3x" id="left-btn"></i>
+            <i class="fas fa-chevron-circle-right fa-3x" id="right-btn"></i>
+        </section>
+        <div class="container">
+            <section class="top-headlines">
+                <h2 class="title">Top headlines</h2>
+                <div class="headline-grid">
+                    <div class="news-card">
+                        <img src="/images/sample_image.jpg" id="thumbnail">
+                        <div class="news-info">
+                            <h2>Some headline</h2>
+                            <small>Some date</small>
+                            <div class="click-more">
+                                <i class="fas fa-chevron-down"></i>
+                                <span class="click-more-text">Click to view description</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <img src="/images/sample_image.jpg" id="thumbnail">
+                        <div class="news-info">
+                            <h2>Some headline</h2>
+                            <small>Some date</small>
+                            <div class="click-more">
+                                <i class="fas fa-chevron-down"></i>
+                                <span class="click-more-text">Click to view description</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <img src="/images/sample_image.jpg" id="thumbnail">
+                        <div class="news-info">
+                            <h2>Some headline</h2>
+                            <small>Some date</small>
+                            <div class="click-more">
+                                <i class="fas fa-chevron-down"></i>
+                                <span class="click-more-text">Click to view description</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <img src="/images/sample_image.jpg" id="thumbnail">
+                        <div class="news-info">
+                            <h2>Some headline</h2>
+                            <small>Some date</small>
+                            <div class="click-more">
+                                <i class="fas fa-chevron-down"></i>
+                                <span class="click-more-text">Click to view description</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <img src="/images/sample_image.jpg" id="thumbnail">
+                        <div class="news-info">
+                            <h2>Some headline</h2>
+                            <small>Some date</small>
+                            <div class="click-more">
+                                <i class="fas fa-chevron-down"></i>
+                                <span class="click-more-text">Click to view description</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <img src="/images/sample_image.jpg" id="thumbnail">
+                        <div class="news-info">
+                            <h2>Some headline</h2>
+                            <small>Some date</small>
+                            <div class="click-more">
+                                <i class="fas fa-chevron-down"></i>
+                                <span class="click-more-text">Click to view description</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="load-more-news">Load more</button>
                 </div>
+            </section>
+            <section class="news-description">
+                <img src="images/sample_image.jpg" alt="Sample image" id="full-image">
+                <div class="news-complete-info">
+                    <h2>Complete header title: Lorem ipsum dolor sit amet consectetur adipisicing elit. In, est.</h2>
+                    <small>January 14, 2020</small>
+                    <div class="news-full-description">
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio, consectetur qui reprehenderit
+                        odit
+                        sequi architecto magni saepe. At, exercitationem! Molestiae, commodi nisi ullam quidem voluptate
+                        vitae iste eaque. Pariatur, non?
+                    </div>
+                    <div class="news-source">
+                        Source: Some source
+                    </div>
+                    <div class="buttons-container">
+                        <button id="redirect"><a href="https://google.com" target="_blank">Some link</a></button>
+                        <button id="close-description">Close description</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+    <section class="display-keyword">
+        <div class="container">
+            <h2 class="title">Search results</h2>
+            <div class="search-advanced">
+                <div class="show-advanced-keyword">
+                    <i class="fas fa-chevron-down"></i>
+                    <span>Click down to view search advanced</span>
+                </div>
+                <div class="opened-advanced-keyword">
+                    <label for="domains">Domains</label><br>
+                    <input type="text" placeholder="ex. bbc.com" id="domains"><br>
+
+                    <label for="date-from">Date from</label><br>
+                    <input type="date" id="date-from"><br>
+
+                    <label for="date-until">Date until</label><br>
+                    <input type="date" id="date-until"><br>
+
+                    <label for="sort-by">Sort by</label><br>
+                    <select name="sort-by" id="sort-by">
+                        <option value="none">--Select sorting options</option>
+                        <option value="relevancy">Relevancy</option>
+                        <option value="popularity">Popularity</option>
+                        <option value="publishedAt">Newest</option>
+                    </select><br><br>
+
+                    <div>
+                        <button id="advanced-search-btn">Advanced search</button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="everything-grid">
+                <div class="news-card">
+                    <img src="/images/sample_image.jpg" id="thumbnail">
+                    <div class="news-info">
+                        <h2>Some headline</h2>
+                        <small>Some date</small>
+                        <div class="click-more">
+                            <i class="fas fa-chevron-down"></i>
+                            <span class="click-more-text">Click to view description</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <img src="/images/sample_image.jpg" id="thumbnail">
+                    <div class="news-info">
+                        <h2>Some headline</h2>
+                        <small>Some date</small>
+                        <div class="click-more">
+                            <i class="fas fa-chevron-down"></i>
+                            <span class="click-more-text">Click to view description</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <img src="/images/sample_image.jpg" id="thumbnail">
+                    <div class="news-info">
+                        <h2>Some headline</h2>
+                        <small>Some date</small>
+                        <div class="click-more">
+                            <i class="fas fa-chevron-down"></i>
+                            <span class="click-more-text">Click to view description</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <img src="/images/sample_image.jpg" id="thumbnail">
+                    <div class="news-info">
+                        <h2>Some headline</h2>
+                        <small>Some date</small>
+                        <div class="click-more">
+                            <i class="fas fa-chevron-down"></i>
+                            <span class="click-more-text">Click to view description</span>
+                        </div>
+                    </div>
+                </div>
+                <button id="load-more-news">Load more</button>
             </div>
         </div>
-        <i class="fas fa-chevron-circle-left fa-3x" id="left-btn"></i>
-        <i class="fas fa-chevron-circle-right fa-3x" id="right-btn"></i>
     </section>
-    <div class="container">
-        <section class="top-headlines">
-            <h2 class="title">Top headlines</h2>
-            <div class="headline-grid">
-                <div class="news-card">
-                    <img src="/images/sample_image.jpg" id="thumbnail">
-                    <div class="news-info">
-                        <h2>Some headline</h2>
-                        <small>Some date</small>
-                        <div class="click-more">
-                            <i class="fas fa-chevron-down"></i>
-                            <span class="click-more-text">Click to view description</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="news-card">
-                    <img src="/images/sample_image.jpg" id="thumbnail">
-                    <div class="news-info">
-                        <h2>Some headline</h2>
-                        <small>Some date</small>
-                        <div class="click-more">
-                            <i class="fas fa-chevron-down"></i>
-                            <span class="click-more-text">Click to view description</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="news-card">
-                    <img src="/images/sample_image.jpg" id="thumbnail">
-                    <div class="news-info">
-                        <h2>Some headline</h2>
-                        <small>Some date</small>
-                        <div class="click-more">
-                            <i class="fas fa-chevron-down"></i>
-                            <span class="click-more-text">Click to view description</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="news-description">
-            <img src="images/sample_image.jpg" alt="Sample image" id="full-image">
-            <div class="news-complete-info">
-                <h2>Complete header title: Lorem ipsum dolor sit amet consectetur adipisicing elit. In, est.</h2>
-                <small>January 14, 2020</small>
-                <div class="news-full-description">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio, consectetur qui reprehenderit odit
-                    sequi architecto magni saepe. At, exercitationem! Molestiae, commodi nisi ullam quidem voluptate
-                    vitae iste eaque. Pariatur, non?
-                </div>
-                <div class="news-source">
-                    Source: Some source
-                </div>
-                <div class="buttons-container">
-                    <button id="redirect"><a href="https://google.com" target="_blank">Some link</a></button>
-                    <button id="close-description">Close description</button>
-                </div>
-            </div>
-        </section>
-        <section class="search-news">
-            <h2 class="title">Search news</h2>
-        </section>
-    </div>
     <footer>
         <div class="footer-main">
             <div class="footer-title">
