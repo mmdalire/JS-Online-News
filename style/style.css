@@ -72,7 +72,7 @@ nav {
 
 .nav-logo {
     height: 100%;
-    line-height: 2.3;
+    line-height: 2.5;
     font-size: 30px;
     font-weight: bold;
     padding: 0 20px;
@@ -83,7 +83,7 @@ nav {
     color: wheat;
     display: inline-block;
     padding: 20px 10px;
-    line-height: 2;
+    line-height: 2.5;
     transition: 0.5s all;
 }
 
@@ -94,7 +94,7 @@ nav {
 }
 
 .nav-search {
-    padding: 20px 0;
+    padding: 23px 0;
 }
 
 #search-keyword {
@@ -112,12 +112,15 @@ nav {
 
 /*Image slider*/
 .image-slide {
+    display: none;
     position: relative;
     width: 100%;
     height: 400px;
-    background: url('../images/sample_image.jpg');
-    background-position: center;
-    background-size: cover;
+    transition: 0.5s all;
+}
+
+.image-slide.active{
+    display: block;
 }
 
 .image-capture {
@@ -137,13 +140,17 @@ nav {
     color: wheat;
 }
 
+.image-headline:hover {
+    text-decoration: underline;
+}
+
 .image-author {
     color: gray;
 }
 
 #left-btn {
     position: absolute;
-    top: 15%;
+    top: 8%;
     left: 1%;
     opacity: 0.5;
     cursor: pointer;
@@ -151,7 +158,7 @@ nav {
 
 #right-btn {
     position: absolute;
-    top: 15%;
+    top: 8%;
     right: 1%;
     opacity: 0.5;
     cursor: pointer;
@@ -168,12 +175,13 @@ nav {
     padding: 20px;
     background-color: var(--main-color);
     color: var(--secondary-color);
-    height: 100vh;
+    height: 101vh;
     width: 100vw;
     position: absolute;
     top: 0;
     right: 0;
     z-index: 1;
+    overflow: auto;
 }
 
 #close {
@@ -241,9 +249,11 @@ nav {
 #thumbnail {
     object-fit: cover;
     width: 100%;
+    height: 200px;
 }
 
 small {
+    font-size: 15px;
     display: block;
     color: gray;
     margin: 2px;
@@ -251,6 +261,10 @@ small {
 
 .news-info {
     padding: 5px 10px;
+}
+
+.news-info h2 {
+    height: 90px;
 }
 
 .click-more {
@@ -276,6 +290,7 @@ small {
 .news-description {
     display: flex;
     overflow: auto;
+    grid-column: 1/4;
     height: 500px;
     background-color: var(--main-color);
     color: var(--tertiary-color);
@@ -490,6 +505,12 @@ footer {
     .everything-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .news-description {
+        grid-column: 1/3;
+        flex-direction: column;
+        height: 500px;
+    }
 }
 
 @media (max-width: 800px) {
@@ -497,10 +518,25 @@ footer {
         width: 100%;
         height: 40%;
     }
+}
+
+@media (max-width: 600px) {
+    /*Headlines*/
+    .headline-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
 
     .news-description {
-        flex-direction: column;
-        height: 500px;
+        grid-column: 1/2;
+    }
+
+    #load-more-news {
+        grid-column: 1/2;
+    }
+
+    /*Keywords*/
+    .everything-grid {
+        grid-template-columns: repeat(1, 1fr);
     }
 }
 
@@ -516,20 +552,6 @@ footer {
     #left-btn,
     #right-btn {
         top: 5%;
-    }
-
-    /*Headlines*/
-    .headline-grid {
-        grid-template-columns: repeat(1, 1fr);
-    }
-
-    #load-more-news {
-        grid-column: 1/2;
-    }
-
-    /*Keywords*/
-    .everything-grid {
-        grid-template-columns: repeat(1, 1fr);
     }
 }
 
