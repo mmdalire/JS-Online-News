@@ -33,6 +33,9 @@ const dateUntil = document.querySelector('#date-until');
 const sortBy = document.querySelector('#sort-by');
 const advancedSearchBtn = document.querySelector('#advanced-search-btn');
 
+//News page request
+const PAGE_SIZE = 60;
+
 /*Image selector section*/
 const nextSlide = () => {
     const active = document.querySelector('.active');
@@ -98,10 +101,71 @@ const createSlide = data => {
     }
 }
 
+/*Display description*/
+const createNewsDescription = data => {
+    const descriptionModalContainer = document.createElement('section');
+    const descriptionModal = document.createElement('div');
+    const descriptionModalImage = document.createElement('img');
+    const descriptionModalInfo = document.createElement('div');
+    const descriptionModalHeadline = document.createElement('h2');
+    const descriptionModalDate = document.createElement('small');
+    const descriptionModalSeparator = document.createElement('hr');
+    const descriptionModalFull = document.createElement('div');
+    const descriptionModalSources = document.createElement('div');
+    const descriptionModalBtns = document.createElement('div');
+    const descriptionModalBtnRedirect = document.createElement('button');
+    const descriptionModalBtnLink = document.createElement('a');
+    const descriptionModalBtnClose = document.createElement('button');
+
+    descriptionModalContainer.setAttribute('class', 'news-modal-container');
+    descriptionModal.setAttribute('class', 'news-modal');
+    descriptionModalImage.setAttribute('id', 'full-image');
+    descriptionModalInfo.setAttribute('class', 'news-modal-info');
+    descriptionModalFull.setAttribute('class', 'news-modal-description');
+    descriptionModalSources.setAttribute('class', 'news-modal-sources');
+    descriptionModalBtns.setAttribute('class', 'news-modal-btns');
+    descriptionModalBtnRedirect.setAttribute('id', 'redirect');
+    descriptionModalBtnClose.setAttribute('id', 'close-modal');
+
+    descriptionModalImage.src = data.urlToImage;
+    descriptionModalHeadline.textContent = data.title;
+    descriptionModalDate.textContent = formatDate(data.publishedAt);
+    descriptionModalFull.textContent = data.description;
+    descriptionModalSources.textContent = data.source.name;
+    descriptionModalBtnLink.href = data.url;
+    descriptionModalBtnLink.target = '_blank';
+    descriptionModalBtnLink.textContent = 'Click here to view more';
+    descriptionModalBtnClose.textContent = 'Close';
+
+    descriptionModalBtnRedirect.appendChild(descriptionModalBtnLink);
+    descriptionModalBtns.appendChild(descriptionModalBtnRedirect);
+    descriptionModalBtns.appendChild(descriptionModalBtnClose);
+    descriptionModalInfo.appendChild(descriptionModalHeadline);
+    descriptionModalInfo.appendChild(descriptionModalDate);
+    descriptionModalInfo.appendChild(descriptionModalSeparator);
+    descriptionModalInfo.appendChild(descriptionModalFull);
+    descriptionModalInfo.appendChild(descriptionModalSources);
+    descriptionModalInfo.appendChild(descriptionModalBtns);
+    descriptionModal.appendChild(descriptionModalImage);
+    descriptionModal.appendChild(descriptionModalInfo);
+    descriptionModalContainer.appendChild(descriptionModal);
+    
+    document.querySelector('body').appendChild(descriptionModalContainer);
+    descriptionModalContainer.style.display = 'block';
+    descriptionModalContainer.style.top = `${document.documentElement.scrollTop}px`;
+    wholeBody.style.overflowY = 'hidden';
+
+    descriptionModalBtnClose.addEventListener('click', () => {
+        document.querySelector('body').removeChild(descriptionModalContainer);
+        descriptionModalContainer.style.display = 'none';
+        wholeBody.style.overflowY = 'auto';
+    });
+}
+
 /*Display news in top-headlines section*/
 /*Text formatting*/
 const formatTitle = title => {
-    const limitedChar = 85;
+    const limitedChar = 80;
     if(title.length > limitedChar) return `${title.substring(0, limitedChar)}...`;
     return title;
 }
@@ -169,9 +233,11 @@ const displayNews = (data, endpoint) => {
         newsCard.appendChild(newsCardInfo);
 
         containers[index].appendChild(newsCard);
-    }
-    data.articles.splice(0, displayNewsMaximum); //Remove the articles being showed
 
+        newsClickMoreDescription.addEventListener('click', () => {
+            createNewsDescription(data.articles[i]);
+        })
+    }
     containers[index].appendChild(loadMoreNews);
 
     //Removes the load more button whenever there are no news to show
@@ -182,6 +248,7 @@ const displayNews = (data, endpoint) => {
     
     //Display more news when load more is clicked
     loadMoreNews.addEventListener('click', () => {
+        data.articles.splice(0, displayNewsMaximum); //Remove the articles being showed
         containers[index].removeChild(loadMoreNews);
         displayNews(data, endpoint);
     });
@@ -218,8 +285,8 @@ const readNews = (category, country, keyword, filter) => {
     const apiCountry = (country === '' || country === undefined) ? '' : `&country=${country}`;
     const apiKeyword = (keyword.value === '' || keyword.value === undefined) ? '' : `&q=${keyword.value}`;
     const apiEndpoint = (keyword.value === '' || keyword.value === undefined) ? 'top-headlines?' : 'everything?';
+    const apiPageSize = `&pageSize=${PAGE_SIZE}`;
     let otherParameters = '';
-
 
     //Added advanced filter parameters
     if(filter !== undefined) {
@@ -229,7 +296,7 @@ const readNews = (category, country, keyword, filter) => {
         if(filter[3] !== '' && filter[3] !== undefined && filter[3] !== 'none') otherParameters += `&sortBy=${filter[3]}`;
     }
 
-    const url = `${apiUrl}${apiEndpoint}${apiKey}${apiCategory}${apiCountry}${apiKeyword}${otherParameters}`;
+    const url = `${apiUrl}${apiEndpoint}${apiKey}${apiCategory}${apiCountry}${apiKeyword}${otherParameters}${apiPageSize}`;
     
     clearDisplay(); //Clear display when switched categories
 
@@ -260,6 +327,11 @@ readNews('', 'ph', '', undefined);
 
 //Transfer page when logo is clicked
 logo.addEventListener('click', () => {
+    if(document.querySelector('.display-keyword').style.display === 'block') {
+        document.querySelector('.display-keyword').style.display = 'none';
+        document.querySelector('.display-category').style.display = 'block';
+    } 
+
     readNews('', 'ph', '', undefined);
     removeCategoryActive();
     //Remove contents in textbox
