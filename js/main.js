@@ -12,6 +12,7 @@ const previous = document.querySelector('#left-btn');
 const mobileNavOpen = document.querySelector('#bars');
 const mobileNavClose = document.querySelector('#close');
 const mobileNav = document.querySelector('.mobile-nav-bar');
+const mobileLogo = document.querySelector('.mobile-nav-bar .nav-logo');
 
 //Grids
 const headlineContainer = document.querySelector('.headline-grid');
@@ -34,7 +35,7 @@ const sortBy = document.querySelector('#sort-by');
 const advancedSearchBtn = document.querySelector('#advanced-search-btn');
 
 //News page request
-const PAGE_SIZE = 60;
+const PAGE_SIZE = 20;
 
 /*Image selector section*/
 const nextSlide = () => {
@@ -127,11 +128,13 @@ const createNewsDescription = data => {
     descriptionModalBtnRedirect.setAttribute('id', 'redirect');
     descriptionModalBtnClose.setAttribute('id', 'close-modal');
 
-    descriptionModalImage.src = data.urlToImage;
+    if(data.urlToImage === undefined || data.urlToImage === null) descriptionModalImage.src = 'images/no_image.jpg';
+    else descriptionModalImage.src = data.urlToImage;
+
     descriptionModalHeadline.textContent = data.title;
     descriptionModalDate.textContent = formatDate(data.publishedAt);
     descriptionModalFull.textContent = data.description;
-    descriptionModalSources.textContent = data.source.name;
+    descriptionModalSources.textContent = `Source by: ${data.source.name}`;
     descriptionModalBtnLink.href = data.url;
     descriptionModalBtnLink.target = '_blank';
     descriptionModalBtnLink.textContent = 'Click here to view more';
@@ -160,6 +163,11 @@ const createNewsDescription = data => {
         descriptionModalContainer.style.display = 'none';
         wholeBody.style.overflowY = 'auto';
     });
+
+    descriptionModalContainer.addEventListener('click', () => {
+        descriptionModalContainer.style.display = 'none';
+        wholeBody.style.overflowY = 'auto';
+    })
 }
 
 /*Display news in top-headlines section*/
@@ -194,13 +202,7 @@ const displayNews = (data, endpoint) => {
     if(endpoint === 'top-headlines?') index = 0;
     else index = 1;
 
-    let displayNewsMaximum = (data.articles.length < 6) ? data.articles.length : 6;
-
-    const loadMoreNews = document.createElement('button');
-    loadMoreNews.setAttribute('id', 'load-more-news');
-    loadMoreNews.textContent = 'Load more';
-
-    for(let i = 0; i < displayNewsMaximum; i++) {
+    for(let i = 0; i < PAGE_SIZE; i++) {
         const newsCard = document.createElement('div');
         const newsCardThumbnail = document.createElement('img');
         const newsCardInfo = document.createElement('div');
@@ -217,7 +219,9 @@ const displayNews = (data, endpoint) => {
         newsClickMoreDown.setAttribute('class', 'fas fa-chevron-down');
         newsClickMoreDescription.setAttribute('class', 'click-more-text');
 
-        newsCardThumbnail.src = data.articles[i].urlToImage;
+        if(data.articles[i].urlToImage === undefined || data.articles[i].urlToImage === null) newsCardThumbnail.src = 'images/no_image.jpg';
+        else newsCardThumbnail.src = data.articles[i].urlToImage;
+
         newsCardHeadline.textContent = formatTitle(data.articles[i].title);
         newsCardDate.textContent = formatDate(data.articles[i].publishedAt);
         newsClickMoreDescription.textContent = ' Click to view description';
@@ -238,20 +242,6 @@ const displayNews = (data, endpoint) => {
             createNewsDescription(data.articles[i]);
         })
     }
-    containers[index].appendChild(loadMoreNews);
-
-    //Removes the load more button whenever there are no news to show
-    if(data.articles.length <= displayNewsMaximum) {
-        displayNewsMaximum = data.articles.length;
-        if(data.articles.length === 0) containers[index].removeChild(loadMoreNews);
-    }
-    
-    //Display more news when load more is clicked
-    loadMoreNews.addEventListener('click', () => {
-        data.articles.splice(0, displayNewsMaximum); //Remove the articles being showed
-        containers[index].removeChild(loadMoreNews);
-        displayNews(data, endpoint);
-    });
 }
 
 //Displays the active tab
@@ -357,6 +347,24 @@ mobileNavOpen.addEventListener('click', () => {
 
 //Mobile navigation bar closes
 mobileNavClose.addEventListener('click', () => {
+    mobileNav.style.display = 'none';
+    wholeBody.style.overflowY = 'auto';
+});
+
+//Mbile logo when clicked
+mobileLogo.addEventListener('click', () => {
+    if(document.querySelector('.display-keyword').style.display === 'block') {
+        document.querySelector('.display-keyword').style.display = 'none';
+        document.querySelector('.display-category').style.display = 'block';
+    } 
+
+    readNews('', 'ph', '', undefined);
+    removeCategoryActive();
+
+    //Remove contents in textbox
+    keywordSearch.value = '';
+    mobileKeywordSearch.value = '';
+
     mobileNav.style.display = 'none';
     wholeBody.style.overflowY = 'auto';
 });
