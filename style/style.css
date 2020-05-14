@@ -256,6 +256,7 @@ nav {
     -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
     box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
     background-color: var(--secondary-color);
+    cursor: pointer;
 }
 
 #thumbnail {
@@ -280,7 +281,6 @@ small {
     padding: 10px 0;
     border-top: 2px solid var(--main-color);
     text-align: center;
-    cursor: pointer;
 }
 
 #load-more-news {
@@ -303,7 +303,7 @@ small {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgb(255, 255, 255, 0.5);
+    background-color: rgb(200, 200, 200, 0.5);
     z-index: 1;
     animation-name: show-modal-container;
     animation-duration: 1s;
@@ -339,8 +339,6 @@ small {
 .news-modal-description {
     padding: 5px 0;
     text-align: justify;
-    max-height: 200px;
-    overflow: auto;
 }
 
 .news-modal-sources {
@@ -548,10 +546,6 @@ footer {
     /*News modal*/
     .news-modal {
         flex-direction: column;
-    }
-
-    .news-modal-description {
-        height: 140px;
     }
 }
 

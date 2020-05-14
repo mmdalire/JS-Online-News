@@ -199,9 +199,9 @@ const displayNews = (data, endpoint) => {
     let index;
 
     //Change the variables depending on the endpoint
-    if(endpoint === 'top-headlines?') index = 0;
+    if(endpoint === 'endpoint=top-headlines') index = 0;
     else index = 1;
-
+    
     for(let i = 0; i < PAGE_SIZE; i++) {
         const newsCard = document.createElement('div');
         const newsCardThumbnail = document.createElement('img');
@@ -238,7 +238,7 @@ const displayNews = (data, endpoint) => {
 
         containers[index].appendChild(newsCard);
 
-        newsClickMoreDescription.addEventListener('click', () => {
+        newsCard.addEventListener('click', () => {
             createNewsDescription(data.articles[i]);
         })
     }
@@ -269,14 +269,13 @@ const clearDisplay = () => {
 
 /*News info*/
 const readNews = (category, country, keyword, filter) => {
-    const apiKey = `apiKey=${key.NEWS_KEY}`;
-    const apiUrl = 'https://newsapi.org/v2/';
+    const apiUrl = '/.netlify/functions/get_news?';
     const apiCategory = (category.textContent === '' || category.textContent === undefined || category.textContent === null) ? '' : `&category=${category.textContent}`;
     const apiCountry = (country === '' || country === undefined) ? '' : `&country=${country}`;
     const apiKeyword = (keyword.value === '' || keyword.value === undefined) ? '' : `&q=${keyword.value}`;
-    const apiEndpoint = (keyword.value === '' || keyword.value === undefined) ? 'top-headlines?' : 'everything?';
-    const apiPageSize = `&pageSize=${PAGE_SIZE}`;
+    const apiEndpoint = (keyword.value === '' || keyword.value === undefined) ? 'endpoint=top-headlines' : 'endpoint=everything';
     let otherParameters = '';
+    const apiPageSize = `&pageSize=${PAGE_SIZE}`;
 
     //Added advanced filter parameters
     if(filter !== undefined) {
@@ -286,8 +285,8 @@ const readNews = (category, country, keyword, filter) => {
         if(filter[3] !== '' && filter[3] !== undefined && filter[3] !== 'none') otherParameters += `&sortBy=${filter[3]}`;
     }
 
-    const url = `${apiUrl}${apiEndpoint}${apiKey}${apiCategory}${apiCountry}${apiKeyword}${otherParameters}${apiPageSize}`;
-    
+    const url = `${apiUrl}${apiEndpoint}${apiCategory}${apiCountry}${apiKeyword}${otherParameters}${apiPageSize}`;
+
     clearDisplay(); //Clear display when switched categories
 
     fetch(url)
@@ -296,7 +295,7 @@ const readNews = (category, country, keyword, filter) => {
         createSlide(data);
         displayNews(data, apiEndpoint);
     })
-    .catch(error => console.log(error))
+    .catch(error => console.log(error));
 }
 
 //Change displays
@@ -402,6 +401,12 @@ keywordBtn.addEventListener('click', () => {
     mobileNav.style.display = 'none';
     wholeBody.style.overflowY = 'auto';
 
+    //Clear advanced filter
+    domain.value = '';
+    dateFrom.value = '';
+    dateUntil.value = '';
+    sortBy.value = 'none';
+
     clearDisplay(); //Clears the display in the grid
     readNews('', '', keywordSearch, undefined); //Fetch the news based on keywords
 });
@@ -417,6 +422,12 @@ mobileKeywordBtn.addEventListener('click', () => {
     //Closes the navigation bar in mobile
     mobileNav.style.display = 'none';
     wholeBody.style.overflowY = 'auto';
+
+    //Clear advanced filter
+    domain.value = '';
+    dateFrom.value = '';
+    dateUntil.value = '';
+    sortBy.value = 'none';
 
     clearDisplay(); //Clears the display in the grid
     readNews('', '', mobileKeywordSearch, undefined); //Fetch the news based on keywords
